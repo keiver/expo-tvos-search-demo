@@ -15,26 +15,29 @@ A working demo app showcasing the [expo-tvos-search](https://github.com/keiver/e
 
 ## What This Demo Shows
 
-- Native tvOS search UI with SwiftUI `.searchable` modifier
-- 8 planets searchable by name or description
-- Selection handling with native Alert
-- Expo managed workflow with tvOS
+- Native tvOS search UI using SwiftUI `.searchable` modifier
+- Customizable grid layouts (columns, card dimensions, spacing)
+- Multiple card styles (portrait, landscape, mini, with/without overlays)
+- Marquee text scrolling for long titles
+- Loading states and empty/no results screens
+- Selection handling and search callbacks
 
-## Tab Demonstrations
+## Tabs
 
-- **Default** - 4-column grid
-- **Portrait** - Tall cards (280x420) with overlay titles
-- **Landscape** - Wide 16:9 cards (500x280)
-- **Mini** - 5-column compact layout (240x360)
-- **External** - Titles below cards
-- **Minimal** - Minimum required props
-- **Help** - Reference page
+- **Minimal** - Bare minimum setup
+- **Default** - 4-column grid with custom colors
+- **Portrait** - Tall cards with overlay titles
+- **Landscape** - Wide 16:9 cards
+- **Mini** - 5-column compact layout
+- **External** - Titles below cards instead of overlay
+- **Help** - About this demo
+
+See code examples below for each configuration.
 
 ## Prerequisites
 
 - macOS with Xcode installed
 - Node.js 20+
-- tvOS Simulator (comes with Xcode)
 
 ## Setup & Running
 
@@ -56,78 +59,140 @@ Type planet names (`mars`, `earth`) or descriptions (`giant`, `ice`, `windy`). U
 
 **Tip:** Check the "Minimal" tab for simplest setup.
 
-## TvosSearchView Props
+## Code Examples
 
-### Layout
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `columns` | `number` | Number of columns in grid (default: 3) |
-| `cardWidth` | `number` | Card width in pixels (default: 280) |
-| `cardHeight` | `number` | Card height in pixels (default: 420) |
-| `cardMargin` | `number` | Margin between cards (default: 20) |
-| `cardPadding` | `number` | Padding inside cards (default: 0) |
-| `topInset` | `number` | Top padding for safe area |
-
-### Display
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `showTitleOverlay` | `boolean` | Show title on card overlay (default: true) |
-| `showTitle` | `boolean` | Show title below card (default: false) |
-| `showSubtitle` | `boolean` | Show subtitle below title (default: false) |
-| `overlayTitleSize` | `number` | Font size for overlay titles |
-
-### Styling
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `textColor` | `string` | Color for text elements |
-| `accentColor` | `string` | Color for focused/selected states |
-
-### Content
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `results` | `SearchResult[]` | Array of search results (required) |
-| `placeholder` | `string` | Search field placeholder text |
-| `isLoading` | `boolean` | Show loading indicator |
-| `emptyStateText` | `string` | Text when no search performed |
-| `searchingText` | `string` | Text while searching |
-| `noResultsText` | `string` | Text when no results found |
-| `noResultsHintText` | `string` | Hint text below no results message |
-
-### Callbacks
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `onSearch` | `(event) => void` | Called when search query changes (required) |
-| `onSelectItem` | `(event) => void` | Called when item selected (required) |
-
-### Other
-
-| Prop | Type | Description |
-|------|------|-------------|
-| `style` | `ViewStyle` | Container style |
-
-## Project Structure
-
+### Minimal - Simplest Setup
+```tsx
+<TvosSearchView
+  results={results}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  style={{ flex: 1 }}
+/>
 ```
-.
-├── app/(tabs)/         # 7 demo tabs
-│   ├── index.tsx
-│   ├── portrait.tsx
-│   ├── landscape.tsx
-│   ├── mini.tsx
-│   ├── external.tsx
-│   ├── minimal.tsx
-│   ├── help.tsx
-│   └── _layout.tsx
-├── constants/planets.ts
-├── app.json
-├── package.json
-└── metro.config.js
+
+### Default - 4-Column Grid
+```tsx
+<TvosSearchView
+  results={results}
+  columns={4}
+  placeholder="Search planets..."
+  isLoading={isLoading}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  emptyStateText="Search for planets"
+  searchingText="Searching..."
+  noResultsText="No planets found"
+  noResultsHintText="Try a different search term"
+  textColor="#e8e8e8"
+  accentColor="#666666"
+  cardWidth={300}
+  cardHeight={450}
+  showTitleOverlay={false}
+  style={{ flex: 1 }}
+/>
 ```
+
+### Portrait - Tall Cards with Overlay
+```tsx
+<TvosSearchView
+  results={results}
+  columns={4}
+  placeholder="Search planets..."
+  isLoading={isLoading}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  emptyStateText="Search for planets"
+  searchingText="Searching..."
+  noResultsText="No planets found"
+  noResultsHintText="Try a different search term"
+  textColor="#E5E5E5"
+  accentColor="#E50914"
+  cardWidth={280}
+  cardHeight={420}
+  overlayTitleSize={18}
+  style={{ flex: 1 }}
+/>
+```
+
+### Landscape - Wide 16:9 Cards
+```tsx
+<TvosSearchView
+  results={results}
+  columns={3}
+  placeholder="Search planets..."
+  isLoading={isLoading}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  emptyStateText="Search for planets"
+  searchingText="Searching..."
+  noResultsText="No planets found"
+  noResultsHintText="Try a different search term"
+  textColor="#00ffff"
+  accentColor="#ff00ff"
+  cardWidth={500}
+  cardHeight={280}
+  style={{ flex: 1 }}
+/>
+```
+
+### Mini - Compact 5-Column
+```tsx
+<TvosSearchView
+  results={results}
+  columns={5}
+  placeholder="Search planets..."
+  isLoading={isLoading}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  emptyStateText="Search for planets"
+  searchingText="Searching..."
+  noResultsText="No planets found"
+  noResultsHintText="Try a different search term"
+  textColor="#ffd4a3"
+  accentColor="#ff6b35"
+  cardWidth={240}
+  cardHeight={360}
+  style={{ flex: 1 }}
+/>
+```
+
+### External - Titles Below Cards
+```tsx
+<TvosSearchView
+  results={results}
+  columns={4}
+  placeholder="Search planets..."
+  isLoading={isLoading}
+  topInset={insets.top + 80}
+  onSearch={handleSearch}
+  onSelectItem={handleSelect}
+  emptyStateText="Search for planets"
+  searchingText="Searching..."
+  noResultsText="No planets found"
+  noResultsHintText="Try a different search term"
+  textColor="#b8d4e8"
+  accentColor="#FF0400"
+  cardWidth={320}
+  cardHeight={480}
+  showTitle={true}
+  showSubtitle={true}
+  showTitleOverlay={false}
+  cardPadding={25}
+  cardMargin={40}
+  style={{ flex: 1 }}
+/>
+```
+
+## Structure
+
+- `app/(tabs)/` - 7 demo tabs showing different configurations
+- `constants/planets.ts` - Sample data (8 planets)
 
 ## Troubleshooting
 
