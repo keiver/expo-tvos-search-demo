@@ -13,7 +13,14 @@
       "Bash(lsof:*)",
       "Bash(xargs kill -9)",
       "Bash(cd:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(find:*)",
+      "Bash(npm test)",
+      "Bash(swift -typecheck:*)",
+      "Bash(git fetch:*)",
+      "WebSearch",
+      "Bash(node -e:*)",
+      "Bash(file:*)"
     ]
   }
 }

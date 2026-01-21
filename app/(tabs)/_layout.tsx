@@ -10,12 +10,12 @@ export default function TabLayout() {
 
       <NativeTabs.Trigger name="portrait">
         <Label>Portrait Cards</Label>
-        <Icon sf="rectangle.portrait" />
+        <Icon sf="rectangle.portrait.fill" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="landscape">
         <Label>Landscape Cards</Label>
-        <Icon sf="rectangle" />
+        <Icon sf="rectangle.fill" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="mini">
@@ -26,6 +26,11 @@ export default function TabLayout() {
       <NativeTabs.Trigger name="external">
         <Label>External Title</Label>
         <Icon sf="text.below.photo" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="minimal">
+        <Label>Minimal Props</Label>
+        <Icon sf="sparkles" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="help">

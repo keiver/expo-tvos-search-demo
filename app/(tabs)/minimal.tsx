@@ -9,35 +9,24 @@ import {
 } from 'expo-tvos-search';
 import { PLANETS } from '@/constants/planets';
 
-export default function PortraitSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>(
-    PLANETS.filter(p =>
-      p.title.toLowerCase().includes('planet') ||
-      p.subtitle?.toLowerCase().includes('planet')
-    )
-  );
-  const [isLoading, setIsLoading] = useState(false);
+export default function MinimalPropsScreen() {
+  const [results, setResults] = useState<SearchResult[]>(PLANETS);
   const insets = useSafeAreaInsets();
 
   const handleSearch = (event: { nativeEvent: { query: string } }) => {
     const { query } = event.nativeEvent;
 
     if (!query.trim()) {
-      setResults([]);
+      setResults(PLANETS);
       return;
     }
 
-    setIsLoading(true);
-
-    setTimeout(() => {
-      const filtered = PLANETS.filter(
-        planet =>
-          planet.title.toLowerCase().includes(query.toLowerCase()) ||
-          planet.subtitle?.toLowerCase().includes(query.toLowerCase()),
-      );
-      setResults(filtered);
-      setIsLoading(false);
-    }, 300);
+    const filtered = PLANETS.filter(
+      planet =>
+        planet.title.toLowerCase().includes(query.toLowerCase()) ||
+        planet.subtitle?.toLowerCase().includes(query.toLowerCase()),
+    );
+    setResults(filtered);
   };
 
   const handleSelect = (event: { nativeEvent: { id: string } }) => {
@@ -53,29 +42,17 @@ export default function PortraitSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#0f172a', '#1e293b', '#0f172a']}
+      colors={['#1a1a1a', '#2d2d2d', '#1a1a1a']}
       locations={[0, 0.5, 1]}
       style={styles.container}
       pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
-        columns={4}
-        placeholder="Search planets..."
-        isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
         style={{ flex: 1 }}
-        emptyStateText="Search for planets"
-        searchingText="Searching..."
-        noResultsText="No planets found"
-        noResultsHintText="Try a different search term"
-        textColor="#E5E5E5"
-        accentColor="#E50914"
-        cardWidth={280}
-        cardHeight={420}
-        overlayTitleSize={18}
       />
     </LinearGradient>
   );
@@ -84,6 +61,5 @@ export default function PortraitSearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#141414',
   },
 });
