@@ -3,17 +3,24 @@
     "name": "expo-tvos-search-demo",
     "slug": "expo-tvos-search-demo",
     "version": "1.0.0",
+    "platforms": [
+      "ios"
+    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
+    "plugins": [
+      "@react-native-tvos/config-tv"
+    ],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.keiverh.expo-tvos-search-demo"
     },
     "android": {
       "adaptiveIcon": {

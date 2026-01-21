@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx expo start:*)",
+      "Bash(pkill:*)",
+      "Bash(npm start)",
+      "Bash(npm run tvos:*)"
+    ]
+  }
+}
