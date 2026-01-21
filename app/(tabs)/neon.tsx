@@ -53,13 +53,14 @@ export default function NeonSearchScreen() {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       style={styles.container}
+      pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
         columns={3}
         placeholder="SEARCH SYSTEM_PLANETS..."
         isLoading={isLoading}
-        topInset={insets.top}
+        topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
         style={{ flex: 1 }}

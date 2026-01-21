@@ -51,13 +51,14 @@ export default function ClassicSearchScreen() {
       colors={['#141414', '#1a0a0a', '#141414']}
       locations={[0, 0.5, 1]}
       style={styles.container}
+      pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
         columns={4}
         placeholder="Search planets..."
         isLoading={isLoading}
-        topInset={insets.top}
+        topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
         style={{ flex: 1 }}

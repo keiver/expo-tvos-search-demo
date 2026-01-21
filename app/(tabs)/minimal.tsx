@@ -51,13 +51,14 @@ export default function MinimalSearchScreen() {
       colors={['#2a2a2a', '#252525', '#2a2a2a']}
       locations={[0, 0.5, 1]}
       style={styles.container}
+      pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
         columns={4}
         placeholder="Search..."
         isLoading={isLoading}
-        topInset={insets.top}
+        topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
         style={{ flex: 1 }}

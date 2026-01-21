@@ -1,3 +1,4 @@
+import { Image } from 'react-native';
 import type { SearchResult } from 'expo-tvos-search';
 
 export const PLANETS: SearchResult[] = [
@@ -5,48 +6,48 @@ export const PLANETS: SearchResult[] = [
     id: 'mercury',
     title: 'Mercury',
     subtitle: 'Smallest planet',
-    imageUrl: require('@/assets/planets/mercury.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/mercury.png')).uri,
   },
   {
     id: 'venus',
     title: 'Venus',
     subtitle: 'Hottest planet',
-    imageUrl: require('@/assets/planets/venus.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/venus.png')).uri,
   },
   {
     id: 'earth',
     title: 'Earth',
     subtitle: 'Our home',
-    imageUrl: require('@/assets/planets/earth.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/earth.png')).uri,
   },
   {
     id: 'mars',
     title: 'Mars',
     subtitle: 'The red planet',
-    imageUrl: require('@/assets/planets/mars.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/mars.png')).uri,
   },
   {
     id: 'jupiter',
     title: 'Jupiter',
     subtitle: 'Largest planet',
-    imageUrl: require('@/assets/planets/jupiter.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/jupiter.png')).uri,
   },
   {
     id: 'saturn',
     title: 'Saturn',
     subtitle: 'Ringed giant',
-    imageUrl: require('@/assets/planets/saturn.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/saturn.png')).uri,
   },
   {
     id: 'uranus',
     title: 'Uranus',
     subtitle: 'Ice giant',
-    imageUrl: require('@/assets/planets/uranus.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/uranus.png')).uri,
   },
   {
     id: 'neptune',
     title: 'Neptune',
     subtitle: 'Windiest planet',
-    imageUrl: require('@/assets/planets/neptune.png'),
+    imageUrl: Image.resolveAssetSource(require('../assets/planets/neptune.png')).uri,
   },
 ];
