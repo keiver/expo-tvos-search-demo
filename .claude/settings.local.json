@@ -20,7 +20,9 @@
       "Bash(git fetch:*)",
       "WebSearch",
       "Bash(node -e:*)",
-      "Bash(file:*)"
+      "Bash(file:*)",
+      "Bash(npm run test:coverage:*)",
+      "Bash(npm audit:*)"
     ]
   }
 }
