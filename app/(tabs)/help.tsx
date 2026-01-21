@@ -1,191 +1,98 @@
-import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, View, Text, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
 
 export default function HelpScreen() {
   const insets = useSafeAreaInsets();
 
   return (
     <LinearGradient
-      colors={['#1e3a8a', '#1e40af', '#3b82f6']}
+      colors={['#0f172a', '#1e293b', '#0f172a']}
       locations={[0, 0.5, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 0, y: 1 }}
       style={styles.container}
     >
       <ScrollView
         style={styles.scrollView}
         contentContainerStyle={[
-          styles.contentContainer,
-          { paddingTop: insets.top + 40 },
+          styles.content,
+          { paddingTop: insets.top + 100 }
         ]}
       >
-        <Text style={styles.title}>expo-tvos-search</Text>
-        <Text style={styles.subtitle}>
-          Native tvOS Search UI for Expo & React Native
-        </Text>
+        <View style={styles.header}>
+          <Text style={styles.title}>expo-tvos-search</Text>
+          <Text style={styles.subtitle}>Native tvOS Search Interface Demo</Text>
+        </View>
 
-        <View style={styles.columnsContainer}>
-          {/* Features Column */}
-          <View style={styles.column}>
-            <Text style={styles.columnTitle}>Features</Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Tab Demonstrations</Text>
 
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>Native SwiftUI integration</Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>
-                Focus management for tvOS
-              </Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>
-                Customizable styling (colors, dimensions)
-              </Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>Grid layouts (1-10 columns)</Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>
-                Loading & empty states
-              </Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>Image support with caching</Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>
-                TypeScript type definitions
-              </Text>
-            </View>
-
-            <View style={styles.feature}>
-              <Ionicons name="checkmark-circle" size={24} color="#60d394" />
-              <Text style={styles.featureText}>
-                Expo managed workflow support
-              </Text>
-            </View>
-          </View>
-
-          {/* Quick Start Column */}
-          <View style={styles.column}>
-            <Text style={styles.columnTitle}>Quick Start</Text>
-
-            <View style={styles.codeBlock}>
-              <Text style={styles.codeComment}>
-                {`// Install the package`}
-              </Text>
-              <Text style={styles.code}>npm install expo-tvos-search</Text>
-
-              <Text style={[styles.codeComment, styles.codeSpacing]}>
-                {`// Import and use in your component`}
-              </Text>
-              <Text style={styles.code}>
-                {`import { TvosSearchView } from 'expo-tvos-search';`}
-              </Text>
-
-              <Text style={[styles.code, styles.codeSpacing]}>
-                {`<TvosSearchView`}
-              </Text>
-              <Text style={styles.code}>{`  results={searchResults}`}</Text>
-              <Text style={styles.code}>{`  columns={4}`}</Text>
-              <Text style={styles.code}>{`  placeholder="Search..."`}</Text>
-              <Text style={styles.code}>{`  onSearch={handleSearch}`}</Text>
-              <Text style={styles.code}>{`  onSelectItem={handleSelect}`}</Text>
-              <Text style={styles.code}>{`  textColor="#E5E5E5"`}</Text>
-              <Text style={styles.code}>{`  accentColor="#E50914"`}</Text>
-              <Text style={styles.code}>{`  cardWidth={280}`}</Text>
-              <Text style={styles.code}>{`  cardHeight={420}`}</Text>
-              <Text style={styles.code}>{`/>`}</Text>
-            </View>
-
-            <Text style={[styles.columnTitle, { marginTop: 32 }]}>
-              Result Interface
-            </Text>
-
-            <View style={styles.codeBlock}>
-              <Text style={styles.code}>{`interface SearchResult {`}</Text>
-              <Text style={styles.code}>{`  id: string;`}</Text>
-              <Text style={styles.code}>{`  title: string;`}</Text>
-              <Text style={styles.code}>{`  subtitle?: string;`}</Text>
-              <Text style={styles.code}>{`  imageUrl?: string | number;`}</Text>
-              <Text style={styles.code}>{`}`}</Text>
-            </View>
-          </View>
-
-          {/* Info Column */}
-          <View style={styles.column}>
-            <Text style={styles.columnTitle}>GitHub Repository</Text>
-            <Text style={styles.infoText}>
-              Visit the repository for full documentation, examples, and source
-              code:
-            </Text>
-            <Text style={styles.link}>
-              github.com/keiver/expo-tvos-search
-            </Text>
-
-            <Text style={[styles.columnTitle, { marginTop: 40 }]}>
-              This Demo
-            </Text>
-            <Text style={styles.infoText}>
-              This app demonstrates 5 themed search interfaces showcasing
-              different styling options:
-            </Text>
-
-            <View style={styles.themeList}>
-              <View style={styles.themeItem}>
-                <Ionicons name="film" size={20} color="#E50914" />
-                <Text style={styles.themeText}>Portrait • Noir</Text>
-              </View>
-
-              <View style={styles.themeItem}>
-                <Ionicons name="game-controller" size={20} color="#ff00ff" />
-                <Text style={styles.themeText}>Landscape • Arcade</Text>
-              </View>
-
-              <View style={styles.themeItem}>
-                <Ionicons name="water" size={20} color="#00d9ff" />
-                <Text style={styles.themeText}>Portrait • Tide</Text>
-              </View>
-
-              <View style={styles.themeItem}>
-                <Ionicons name="sparkles" size={20} color="#ff6b35" />
-                <Text style={styles.themeText}>Portrait • Aurora</Text>
-              </View>
-
-              <View style={styles.themeItem}>
-                <Ionicons name="ellipse" size={20} color="#666666" />
-                <Text style={styles.themeText}>Portrait • Pure</Text>
-              </View>
-            </View>
-
-            <Text style={[styles.columnTitle, { marginTop: 40 }]}>
-              Requirements
-            </Text>
-            <Text style={styles.infoText}>• Expo SDK 54+</Text>
-            <Text style={styles.infoText}>• react-native-tvos 0.77+</Text>
-            <Text style={styles.infoText}>• Apple TV simulator or device</Text>
-            <Text style={styles.infoText}>• macOS for development</Text>
-
-            <Text style={[styles.infoText, { marginTop: 40, fontStyle: 'italic', opacity: 0.9 }]}>
-              Built with ❤️ for tvOS developers
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>Default</Text>
+            <Text style={styles.itemDescription}>
+              Clean cards without overlay - perfect for minimalist designs
             </Text>
           </View>
+
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>Portrait Cards</Text>
+            <Text style={styles.itemDescription}>
+              Standard portrait layout with blurred title overlay and marquee scrolling
+            </Text>
+          </View>
+
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>Landscape Cards</Text>
+            <Text style={styles.itemDescription}>
+              Wide landscape format ideal for movie posters and video content
+            </Text>
+          </View>
+
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>Mini</Text>
+            <Text style={styles.itemDescription}>
+              Compact grid layout for displaying many items at once
+            </Text>
+          </View>
+
+          <View style={styles.item}>
+            <Text style={styles.itemTitle}>External Title</Text>
+            <Text style={styles.itemDescription}>
+              Title and subtitle displayed below the card instead of overlay
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Key Features</Text>
+
+          <View style={styles.feature}>
+            <Text style={styles.featureIcon}>✨</Text>
+            <Text style={styles.featureText}>Native tvOS blur material overlays</Text>
+          </View>
+
+          <View style={styles.feature}>
+            <Text style={styles.featureIcon}>📱</Text>
+            <Text style={styles.featureText}>Responsive grid layouts</Text>
+          </View>
+
+          <View style={styles.feature}>
+            <Text style={styles.featureIcon}>🎯</Text>
+            <Text style={styles.featureText}>Focus management & navigation</Text>
+          </View>
+
+          <View style={styles.feature}>
+            <Text style={styles.featureIcon}>🔍</Text>
+            <Text style={styles.featureText}>Real-time search filtering</Text>
+          </View>
+
+          <View style={styles.feature}>
+            <Text style={styles.featureIcon}>📜</Text>
+            <Text style={styles.featureText}>Marquee text scrolling</Text>
+          </View>
+        </View>
+
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>Built with Expo & React Native tvOS</Text>
         </View>
       </ScrollView>
     </LinearGradient>
@@ -199,89 +106,71 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
-  contentContainer: {
+  content: {
     paddingHorizontal: 80,
     paddingBottom: 80,
   },
+  header: {
+    marginBottom: 60,
+    alignItems: 'center',
+  },
   title: {
     fontSize: 56,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    marginBottom: 8,
-    textAlign: 'center',
+    fontWeight: '700',
+    color: '#f1f5f9',
+    marginBottom: 16,
+    letterSpacing: -1,
   },
   subtitle: {
     fontSize: 24,
-    color: '#e0e7ff',
-    marginBottom: 60,
-    textAlign: 'center',
+    color: '#94a3b8',
+    fontWeight: '400',
   },
-  columnsContainer: {
-    flexDirection: 'row',
-    gap: 60,
+  section: {
+    marginBottom: 50,
   },
-  column: {
-    flex: 1,
+  sectionTitle: {
+    fontSize: 32,
+    fontWeight: '600',
+    color: '#e2e8f0',
+    marginBottom: 30,
   },
-  columnTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#ffffff',
-    marginBottom: 20,
+  item: {
+    marginBottom: 28,
+  },
+  itemTitle: {
+    fontSize: 26,
+    fontWeight: '600',
+    color: '#cbd5e1',
+    marginBottom: 8,
+  },
+  itemDescription: {
+    fontSize: 20,
+    color: '#94a3b8',
+    lineHeight: 30,
   },
   feature: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 12,
-    marginBottom: 16,
+    marginBottom: 20,
+  },
+  featureIcon: {
+    fontSize: 28,
+    marginRight: 16,
   },
   featureText: {
-    fontSize: 20,
-    color: '#e0e7ff',
-  },
-  codeBlock: {
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-    padding: 24,
-    borderRadius: 12,
-  },
-  code: {
-    fontFamily: 'Courier New',
-    fontSize: 16,
-    color: '#a5f3fc',
-    lineHeight: 24,
-  },
-  codeComment: {
-    fontFamily: 'Courier New',
-    fontSize: 16,
-    color: '#94a3b8',
-    lineHeight: 24,
-  },
-  codeSpacing: {
-    marginTop: 16,
-  },
-  infoText: {
-    fontSize: 20,
-    color: '#e0e7ff',
-    marginBottom: 12,
-    lineHeight: 28,
-  },
-  link: {
     fontSize: 22,
-    color: '#60d394',
-    fontWeight: '600',
-    marginTop: 12,
+    color: '#cbd5e1',
   },
-  themeList: {
-    marginTop: 16,
-    gap: 12,
-  },
-  themeItem: {
-    flexDirection: 'row',
+  footer: {
+    marginTop: 40,
+    paddingTop: 40,
+    borderTopWidth: 1,
+    borderTopColor: '#334155',
     alignItems: 'center',
-    gap: 12,
   },
-  themeText: {
-    fontSize: 20,
-    color: '#e0e7ff',
+  footerText: {
+    fontSize: 18,
+    color: '#64748b',
   },
 });

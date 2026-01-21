@@ -9,8 +9,13 @@ import {
 } from 'expo-tvos-search';
 import { PLANETS } from '@/constants/planets';
 
-export default function MinimalSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>([]);
+export default function ExternalTitleSearchScreen() {
+  const [results, setResults] = useState<SearchResult[]>(
+    PLANETS.filter(p =>
+      p.title.toLowerCase().includes('planet') ||
+      p.subtitle?.toLowerCase().includes('planet')
+    )
+  );
   const [isLoading, setIsLoading] = useState(false);
   const insets = useSafeAreaInsets();
 
@@ -48,7 +53,7 @@ export default function MinimalSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#2a2a2a', '#252525', '#2a2a2a']}
+      colors={['#0f172a', '#1e293b', '#0f172a']}
       locations={[0, 0.5, 1]}
       style={styles.container}
       pointerEvents="box-none"
@@ -56,27 +61,33 @@ export default function MinimalSearchScreen() {
       <TvosSearchView
         results={results}
         columns={4}
-        placeholder="Search..."
+        placeholder="Search planets..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
-        style={{ flex: 1 }}
+        style={{flex: 1}}
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
-        noResultsHintText="Try searching for: mars, earth, giant, ice"
-        textColor="#e8e8e8"
-        accentColor="#666666"
-        cardWidth={300}
-        cardHeight={450}
+        noResultsHintText="Try a different search term"
+        textColor="#b8d4e8"
+        accentColor="#FF0400"
+        cardWidth={320}
+        cardHeight={480}
+        showTitle={true}
+        showSubtitle={true}
+        showTitleOverlay={false}
+        cardPadding={25}
+        cardMargin={40}
       />
     </LinearGradient>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1a2332',
   },
 });

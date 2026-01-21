@@ -9,8 +9,13 @@ import {
 } from 'expo-tvos-search';
 import { PLANETS } from '@/constants/planets';
 
-export default function ClassicSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>([]);
+export default function DefaultSearchScreen() {
+  const [results, setResults] = useState<SearchResult[]>(
+    PLANETS.filter(p =>
+      p.title.toLowerCase().includes('planet') ||
+      p.subtitle?.toLowerCase().includes('planet')
+    )
+  );
   const [isLoading, setIsLoading] = useState(false);
   const insets = useSafeAreaInsets();
 
@@ -48,7 +53,7 @@ export default function ClassicSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#141414', '#1a0a0a', '#141414']}
+      colors={['#0f172a', '#1e293b', '#0f172a']}
       locations={[0, 0.5, 1]}
       style={styles.container}
       pointerEvents="box-none"
@@ -65,11 +70,12 @@ export default function ClassicSearchScreen() {
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
-        noResultsHintText="Try searching for: mars, earth, giant, ice"
-        textColor="#E5E5E5"
-        accentColor="#E50914"
-        cardWidth={280}
-        cardHeight={420}
+        noResultsHintText="Try a different search term"
+        textColor="#e8e8e8"
+        accentColor="#666666"
+        cardWidth={300}
+        cardHeight={450}
+        showTitleOverlay={false}
       />
     </LinearGradient>
   );
@@ -78,6 +84,5 @@ export default function ClassicSearchScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#141414',
   },
 });

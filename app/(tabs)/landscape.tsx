@@ -9,8 +9,13 @@ import {
 } from 'expo-tvos-search';
 import { PLANETS } from '@/constants/planets';
 
-export default function NeonSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>([]);
+export default function LandscapeSearchScreen() {
+  const [results, setResults] = useState<SearchResult[]>(
+    PLANETS.filter(p =>
+      p.title.toLowerCase().includes('planet') ||
+      p.subtitle?.toLowerCase().includes('planet')
+    )
+  );
   const [isLoading, setIsLoading] = useState(false);
   const insets = useSafeAreaInsets();
 
@@ -48,17 +53,15 @@ export default function NeonSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#0a0e27', '#1a0540', '#0a0e27']}
+      colors={['#0f172a', '#1e293b', '#0f172a']}
       locations={[0, 0.5, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
       style={styles.container}
       pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
         columns={3}
-        placeholder="SEARCH SYSTEM_PLANETS..."
+        placeholder="Search planets..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
@@ -67,7 +70,7 @@ export default function NeonSearchScreen() {
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
-        noResultsHintText="Try searching for: mars, earth, giant, ice"
+        noResultsHintText="Try a different search term"
         textColor="#00ffff"
         accentColor="#ff00ff"
         cardWidth={500}

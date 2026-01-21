@@ -9,8 +9,13 @@ import {
 } from 'expo-tvos-search';
 import { PLANETS } from '@/constants/planets';
 
-export default function SunsetSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>([]);
+export default function MiniSearchScreen() {
+  const [results, setResults] = useState<SearchResult[]>(
+    PLANETS.filter(p =>
+      p.title.toLowerCase().includes('planet') ||
+      p.subtitle?.toLowerCase().includes('planet')
+    )
+  );
   const [isLoading, setIsLoading] = useState(false);
   const insets = useSafeAreaInsets();
 
@@ -48,17 +53,15 @@ export default function SunsetSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#1a0f29', '#2d1b3d', '#3d1f4f']}
+      colors={['#0f172a', '#1e293b', '#0f172a']}
       locations={[0, 0.5, 1]}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
       style={styles.container}
       pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
         columns={5}
-        placeholder="Discover planets..."
+        placeholder="Search planets..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
@@ -67,7 +70,7 @@ export default function SunsetSearchScreen() {
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
-        noResultsHintText="Try searching for: mars, earth, giant, ice"
+        noResultsHintText="Try a different search term"
         textColor="#ffd4a3"
         accentColor="#ff6b35"
         cardWidth={240}
