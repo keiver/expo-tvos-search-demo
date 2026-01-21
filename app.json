@@ -3,6 +3,7 @@
     "name": "expo-tvos-search-demo",
     "slug": "expo-tvos-search-demo",
     "version": "1.0.0",
+    "scheme": "expo-tvos-search-demo",
     "platforms": [
       "ios"
     ],
@@ -11,8 +12,13 @@
     "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "plugins": [
+      "expo-router",
       "@react-native-tvos/config-tv"
     ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",

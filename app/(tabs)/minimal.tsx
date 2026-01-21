@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View, StyleSheet } from 'react-native';
 import {
   TvosSearchView,
   isNativeSearchAvailable,
@@ -65,7 +65,7 @@ const PLANETS: SearchResult[] = [
   },
 ];
 
-export function SearchScreen() {
+export default function MinimalSearchScreen() {
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -79,7 +79,6 @@ export function SearchScreen() {
 
     setIsLoading(true);
 
-    // Simulate async search
     setTimeout(() => {
       const filtered = PLANETS.filter(
         planet =>
@@ -99,34 +98,36 @@ export function SearchScreen() {
   };
 
   if (!isNativeSearchAvailable()) {
-    // This should not happen on tvOS, but we handle it gracefully
     return null;
   }
 
   return (
-    <TvosSearchView
-      results={results}
-      columns={4}
-      placeholder="Search planets..."
-      isLoading={isLoading}
-      topInset={0}
-      onSearch={handleSearch}
-      onSelectItem={handleSelect}
-      style={{ flex: 1 }}
-      emptyStateText="Search for planets"
-      searchingText="Searching..."
-      noResultsText="No planets found"
-      noResultsHintText="Try searching for: mars, earth, giant, ice"
-      // NOTE: New props available in v1.3.0+
-      // Uncomment after publishing the new library version:
-      textColor="#E5E5E5"      // Light gray text on dark background
-      accentColor="#E50914"    // Netflix red for focused borders
-      cardWidth={280}          // Default portrait width
-      cardHeight={420}         // Default portrait height (2:3 ratio)
-
-      // For landscape cards, try:
-      // cardWidth={420}
-      // cardHeight={240}         // 16:9 ratio
-    />
+    <View style={styles.container}>
+      <TvosSearchView
+        results={results}
+        columns={4}
+        placeholder="Search..."
+        isLoading={isLoading}
+        topInset={0}
+        onSearch={handleSearch}
+        onSelectItem={handleSelect}
+        style={{ flex: 1 }}
+        emptyStateText="Search for planets"
+        searchingText="Searching..."
+        noResultsText="No planets found"
+        noResultsHintText="Try searching for: mars, earth, giant, ice"
+        textColor="#1a1a1a"
+        accentColor="#000000"
+        cardWidth={300}
+        cardHeight={450}
+      />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f5f5f5',
+  },
+});

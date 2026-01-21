@@ -4,7 +4,11 @@
       "Bash(npx expo start:*)",
       "Bash(pkill:*)",
       "Bash(npm start)",
-      "Bash(npm run tvos:*)"
+      "Bash(npm run tvos:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run prebuild:*)",
+      "Bash(ls:*)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }
