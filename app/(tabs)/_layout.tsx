@@ -4,28 +4,33 @@ export default function TabLayout() {
   return (
     <NativeTabs blurEffect="systemChromeMaterial">
       <NativeTabs.Trigger name="index">
-        <Label>Classic</Label>
-        <Icon sf="sparkles.tv.fill" />
+        <Label>Portrait • Noir</Label>
+        <Icon sf="film.fill" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="neon">
-        <Label>Neon</Label>
-        <Icon sf="bolt.fill" />
+        <Label>Landscape • Arcade</Label>
+        <Icon sf="gamecontroller.fill" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="ocean">
-        <Label>Ocean</Label>
-        <Icon sf="water.waves" />
+        <Label>Portrait • Tide</Label>
+        <Icon sf="drop.triangle.fill" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="sunset">
-        <Label>Sunset</Label>
-        <Icon sf="sunset.fill" />
+        <Label>Portrait • Aurora</Label>
+        <Icon sf="sparkles" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="minimal">
-        <Label>Minimal</Label>
-        <Icon sf="square.fill" />
+        <Label>Portrait • Pure</Label>
+        <Icon sf="circle" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="help">
+        <Label>Help</Label>
+        <Icon sf="info.circle.fill" />
       </NativeTabs.Trigger>
     </NativeTabs>
   );
