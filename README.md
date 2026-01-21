@@ -1,15 +1,34 @@
-# expo-tvos-search Demo
+# expo-tvos-search demo
+
+<div align="center">
+
+[![npm version](https://img.shields.io/npm/v/expo-tvos-search.svg?style=flat-square)](https://www.npmjs.com/package/expo-tvos-search)
+[![npm downloads](https://img.shields.io/npm/dm/expo-tvos-search.svg?style=flat-square)](https://www.npmjs.com/package/expo-tvos-search)
+[![GitHub stars](https://img.shields.io/github/stars/keiver/expo-tvos-search.svg?style=flat-square)](https://github.com/keiver/expo-tvos-search)
+[![License](https://img.shields.io/npm/l/expo-tvos-search.svg?style=flat-square)](https://github.com/keiver/expo-tvos-search/blob/main/LICENSE)
+
+![Lowres Demo GIF](./demo-expo-tvos-search.gif)
+
+</div>
 
 A working demo app showcasing the [expo-tvos-search](https://github.com/keiver/expo-tvos-search) library on tvOS using Expo.
 
 ## What This Demo Shows
 
-- Native tvOS search UI using SwiftUI's `.searchable` modifier
-- Planet search with 8 planets (Mercury through Neptune)
-- Real Wikipedia images for each planet
-- Search filtering by planet name or description (try "giant" or "ice")
+- Native tvOS search UI with SwiftUI `.searchable` modifier
+- 8 planets searchable by name or description
 - Selection handling with native Alert
-- Full Expo managed workflow with tvOS support
+- Expo managed workflow with tvOS
+
+## Tab Demonstrations
+
+- **Default** - 4-column grid
+- **Portrait** - Tall cards (280x420) with overlay titles
+- **Landscape** - Wide 16:9 cards (500x280)
+- **Mini** - 5-column compact layout (240x360)
+- **External** - Titles below cards
+- **Minimal** - Minimum required props
+- **Help** - Reference page
 
 ## Prerequisites
 
@@ -19,89 +38,107 @@ A working demo app showcasing the [expo-tvos-search](https://github.com/keiver/e
 
 ## Setup & Running
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+Open two terminals:
 
-2. **Generate native iOS/tvOS projects:**
-   ```bash
-   npm run prebuild
-   ```
-   This runs `EXPO_TV=1 npx expo prebuild --clean` which generates tvOS-enabled native projects.
+**Terminal 1** - Install, prebuild, start Metro:
+```bash
+npm run clear
+```
 
-3. **Start Metro and run on tvOS:**
-   
-   Open two terminals:
-   
-   Terminal 1 - Start Metro:
-   ```bash
-   npm start
-   ```
-   
-   Terminal 2 - Launch tvOS simulator:
-   ```bash
-   npm run tvos
-   ```
+**Terminal 2** - Launch tvOS simulator:
+```bash
+npm run tvos
+```
 
 ## Using the Demo
 
-1. **Launch the app** - The search field should automatically focus
-2. **Type a search query:**
-   - `mars` → Shows Mars
-   - `earth` → Shows Earth
-   - `giant` → Shows Jupiter and Saturn (gas giants)
-   - `ice` → Shows Uranus (ice giant)
-3. **Navigate results** - Use the tvOS remote/trackpad to move between results
-4. **Select a planet** - Press the center button to see an alert with planet details
+Type planet names (`mars`, `earth`) or descriptions (`giant`, `ice`, `windy`). Use tvOS remote to navigate results, press center to select.
 
-## What to Search For
+**Tip:** Check the "Minimal" tab for simplest setup.
 
-Try these search terms:
-- Planet names: `mercury`, `venus`, `earth`, `mars`, `jupiter`, `saturn`, `uranus`, `neptune`
-- Descriptions: `smallest`, `hottest`, `red`, `largest`, `giant`, `ice`, `windy`
-- Partial matches work too: `mar` finds Mars, `urn` finds Saturn and Uranus
+## TvosSearchView Props
+
+### Layout
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `columns` | `number` | Number of columns in grid (default: 3) |
+| `cardWidth` | `number` | Card width in pixels (default: 280) |
+| `cardHeight` | `number` | Card height in pixels (default: 420) |
+| `cardMargin` | `number` | Margin between cards (default: 20) |
+| `cardPadding` | `number` | Padding inside cards (default: 0) |
+| `topInset` | `number` | Top padding for safe area |
+
+### Display
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `showTitleOverlay` | `boolean` | Show title on card overlay (default: true) |
+| `showTitle` | `boolean` | Show title below card (default: false) |
+| `showSubtitle` | `boolean` | Show subtitle below title (default: false) |
+| `overlayTitleSize` | `number` | Font size for overlay titles |
+
+### Styling
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `textColor` | `string` | Color for text elements |
+| `accentColor` | `string` | Color for focused/selected states |
+
+### Content
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `results` | `SearchResult[]` | Array of search results (required) |
+| `placeholder` | `string` | Search field placeholder text |
+| `isLoading` | `boolean` | Show loading indicator |
+| `emptyStateText` | `string` | Text when no search performed |
+| `searchingText` | `string` | Text while searching |
+| `noResultsText` | `string` | Text when no results found |
+| `noResultsHintText` | `string` | Hint text below no results message |
+
+### Callbacks
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `onSearch` | `(event) => void` | Called when search query changes (required) |
+| `onSelectItem` | `(event) => void` | Called when item selected (required) |
+
+### Other
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `style` | `ViewStyle` | Container style |
 
 ## Project Structure
 
 ```
 .
-├── App.tsx              # Main app component
-├── SearchScreen.tsx     # Planet search screen using expo-tvos-search
-├── app.json             # Expo config with @react-native-tvos/config-tv plugin
-├── package.json         # Dependencies including expo-tvos-search
-└── ios/                 # Native tvOS project (generated by prebuild)
+├── app/(tabs)/         # 7 demo tabs
+│   ├── index.tsx
+│   ├── portrait.tsx
+│   ├── landscape.tsx
+│   ├── mini.tsx
+│   ├── external.tsx
+│   ├── minimal.tsx
+│   ├── help.tsx
+│   └── _layout.tsx
+├── constants/planets.ts
+├── app.json
+├── package.json
+└── metro.config.js
 ```
-
-## How This Works
-
-This is an **Expo managed** app configured for tvOS:
-
-1. **package.json** - Uses `react-native-tvos` instead of standard `react-native`
-2. **app.json** - Has `@react-native-tvos/config-tv` in plugins array and `platforms: ["ios"]`
-3. **Prebuild** - Running `EXPO_TV=1 npx expo prebuild` generates tvOS-enabled native projects
-4. **Runtime** - The native module `expo-tvos-search` integrates seamlessly
 
 ## Troubleshooting
 
-### Native module not found
-If you see `requireNativeViewManager("ExpoTvosSearch") returned null`:
+### Issues with native module or prebuild
 ```bash
-npm run prebuild
+npm run clear
 npm run tvos
 ```
 
-### Prebuild fails
-Make sure you have:
-- `react-native-tvos` (not `react-native`) in dependencies
-- `@react-native-tvos/config-tv` plugin in app.json
-- `EXPO_TV=1` environment variable when running prebuild
-
 ### Search UI doesn't appear
-Ensure you're running on Apple TV simulator, not iPhone/iPad simulator.
-
-### "Scheme not found" error
-After prebuild, Xcode creates both iOS and tvOS schemes. The `expo run:ios` command should auto-detect the tvOS scheme. If not, manually select it in Xcode.
+Run on Apple TV simulator, not iPhone/iPad.
 
 ## Learn More
 
