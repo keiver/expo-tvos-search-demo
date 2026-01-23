@@ -22,7 +22,13 @@
       "Bash(node -e:*)",
       "Bash(file:*)",
       "Bash(npm run test:coverage:*)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(while read commit msg)",
+      "Bash(do echo \"=== $msg ===\")",
+      "Bash(done)",
+      "Bash(grep:*)",
+      "Bash(npm ls:*)",
+      "Bash(npm view:*)"
     ]
   }
 }
