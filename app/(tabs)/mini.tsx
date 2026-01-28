@@ -1,88 +1,84 @@
-import { useState } from 'react';
-import { Alert, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { LinearGradient } from 'expo-linear-gradient';
-import {
-  TvosSearchView,
-  isNativeSearchAvailable,
-  type SearchResult,
-} from 'expo-tvos-search';
-import { PLANETS } from '@/constants/planets';
+import {useState} from "react"
+import {Alert, StyleSheet} from "react-native"
+import {useSafeAreaInsets} from "react-native-safe-area-context"
+import {LinearGradient} from "expo-linear-gradient"
+import {TvosSearchView, isNativeSearchAvailable, type SearchResult} from "expo-tvos-search"
+import {PLANETS} from "@/constants/planets"
 
-export default function MiniSearchScreen() {
+export default function DefaultSearchScreen() {
   const [results, setResults] = useState<SearchResult[]>(
-    PLANETS.filter(p =>
-      p.title.toLowerCase().includes('planet') ||
-      p.subtitle?.toLowerCase().includes('planet')
-    )
-  );
-  const [isLoading, setIsLoading] = useState(false);
-  const insets = useSafeAreaInsets();
+    PLANETS.filter(p => p.title.toLowerCase().includes("planet") || p.subtitle?.toLowerCase().includes("planet"))
+  )
+  const [isLoading, setIsLoading] = useState(false)
+  const insets = useSafeAreaInsets()
 
-  const handleSearch = (event: { nativeEvent: { query: string } }) => {
-    const { query } = event.nativeEvent;
+  const handleSearch = (event: {nativeEvent: {query: string}}) => {
+    const {query} = event.nativeEvent
 
     if (!query.trim()) {
-      setResults([]);
-      return;
+      setResults([])
+      return
     }
 
-    setIsLoading(true);
+    setIsLoading(true)
 
     setTimeout(() => {
       const filtered = PLANETS.filter(
         planet =>
           planet.title.toLowerCase().includes(query.toLowerCase()) ||
-          planet.subtitle?.toLowerCase().includes(query.toLowerCase()),
-      );
-      setResults(filtered);
-      setIsLoading(false);
-    }, 300);
-  };
+          planet.subtitle?.toLowerCase().includes(query.toLowerCase())
+      )
+      setResults(filtered)
+      setIsLoading(false)
+    }, 300)
+  }
 
-  const handleSelect = (event: { nativeEvent: { id: string } }) => {
-    const planet = PLANETS.find(p => p.id === event.nativeEvent.id);
+  const handleSelect = (event: {nativeEvent: {id: string}}) => {
+    const planet = PLANETS.find(p => p.id === event.nativeEvent.id)
     if (planet) {
-      Alert.alert(planet.title, planet.subtitle);
+      Alert.alert(planet.title, planet.subtitle)
     }
-  };
+  }
 
   if (!isNativeSearchAvailable()) {
-    return null;
+    return null
   }
 
   return (
     <LinearGradient
-      colors={['#0f172a', '#1e293b', '#0f172a']}
+      colors={["#0f172a", "#1e293b", "#0f172a"]}
       locations={[0, 0.5, 1]}
       style={styles.container}
       pointerEvents="box-none"
     >
       <TvosSearchView
         results={results}
-        columns={5}
+        columns={4}
         placeholder="Search planets..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
-        style={{ flex: 1 }}
+        onError={e => console.warn(`[Default] Error [${e.nativeEvent.category}]: ${e.nativeEvent.message}`)}
+        onValidationWarning={e => console.warn(`[Default] Warning [${e.nativeEvent.type}]: ${e.nativeEvent.message}`)}
+        style={{flex: 1}}
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
         noResultsHintText="Try a different search term"
-        textColor="#ffd4a3"
-        accentColor="#ff6b35"
-        cardWidth={240}
-        cardHeight={360}
+        textColor="#e8e8e8"
+        accentColor="#666666"
+        cardWidth={300}
+        cardHeight={450}
+        showTitleOverlay={false}
+        imageContentMode="fit"
       />
     </LinearGradient>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#2d1b3d',
-  },
-});
+    flex: 1
+  }
+})

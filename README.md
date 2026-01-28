@@ -21,6 +21,7 @@ A working demo app showcasing the [expo-tvos-search](https://github.com/keiver/e
 - Marquee text scrolling for long titles
 - Loading states and empty/no results screens
 - Selection handling and search callbacks
+- Apple TV hardware keyboard support via focus callbacks (v1.3.2+)
 
 ## Tabs
 

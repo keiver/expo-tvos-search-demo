@@ -29,8 +29,8 @@ export default function TabLayout() {
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="minimal">
-        <Label>Minimal Props</Label>
-        <Icon sf="sparkles" />
+        <Label>Text Controlled</Label>
+        <Icon sf="character.cursor.ibeam" />
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="help">

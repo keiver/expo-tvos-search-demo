@@ -36,7 +36,9 @@ export default function HelpScreen() {
                 {icon: "search", label: "Native Search"},
                 {icon: "grid", label: "Grid Layout"},
                 {icon: "color-palette", label: "Customizable"},
-                {icon: "flash", label: "Performant"}
+                {icon: "flash", label: "Performant"},
+                {icon: "text", label: "Marquee Text"},
+                {icon: "hardware-chip", label: "HW Keyboard"}
               ].map((feature, index) => (
                 <View key={index} style={styles.pill}>
                   <Ionicons name={feature.icon as any} size={20} color="#38bdf8" />
@@ -47,7 +49,7 @@ export default function HelpScreen() {
 
             {/* Footer */}
             <View style={styles.footer}>
-              <Text style={styles.footerText}>v1.2.3</Text>
+              <Text style={styles.footerText}>v1.4.0</Text>
               <Text style={styles.footerText}>•</Text>
               <Text style={styles.footerText}>Built with Expo</Text>
             </View>
@@ -67,16 +69,17 @@ export default function HelpScreen() {
 
                 <View style={styles.cardContent}>
                   <Text style={styles.cardText}>
-                    This app demonstrates the expo-tvos-search library with various card layouts:
+                    This app demonstrates the expo-tvos-search library features across tabs:
                   </Text>
 
                   <View style={styles.tabsList}>
                     {[
-                      {name: "Default", desc: "Standard 4-column grid"},
-                      {name: "Portrait", desc: "Tall cards with overlay"},
-                      {name: "Landscape", desc: "Wide 16:9 cards"},
-                      {name: "Mini", desc: "Compact 5-column grid"},
-                      {name: "External Title", desc: "Title below cards"}
+                      {name: "Default", desc: "Basic setup, error monitoring"},
+                      {name: "Portrait", desc: "Focus border, search field tracking"},
+                      {name: "Landscape", desc: "Image fit mode, custom state messages"},
+                      {name: "Mini", desc: "Marquee scrolling, compact grid"},
+                      {name: "External Title", desc: "Titles below cards, marquee disabled"},
+                      {name: "Text Controlled", desc: "Programmatic searchText, availability fallback"}
                     ].map((tab, index) => (
                       <View key={index} style={styles.tabItem}>
                         <View style={styles.tabDot} />
@@ -176,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(56, 189, 248, 0.1)",
     borderWidth: 1,
     borderColor: "rgba(56, 189, 248, 0.3)",
-    borderRadius: 20,
+    borderRadius: 9999,
     paddingHorizontal: isTV ? 20 : 16,
     paddingVertical: isTV ? 12 : 10,
     gap: 8

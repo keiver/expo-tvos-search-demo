@@ -28,7 +28,10 @@
       "Bash(done)",
       "Bash(grep:*)",
       "Bash(npm ls:*)",
-      "Bash(npm view:*)"
+      "Bash(npm view:*)",
+      "Bash(git show:*)",
+      "Bash(xargs:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

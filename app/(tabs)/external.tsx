@@ -53,7 +53,7 @@ export default function ExternalTitleSearchScreen() {
 
   return (
     <LinearGradient
-      colors={['#0f172a', '#1e293b', '#0f172a']}
+      colors={["#0f172a", "#1e293b", "#0f172a"]}
       locations={[0, 0.5, 1]}
       style={styles.container}
       pointerEvents="box-none"
@@ -66,20 +66,25 @@ export default function ExternalTitleSearchScreen() {
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
+        onSearchFieldFocused={() => console.log("[External] Search field focused")}
+        onSearchFieldBlurred={() => console.log("[External] Search field blurred")}
         style={{flex: 1}}
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
         noResultsHintText="Try a different search term"
         textColor="#b8d4e8"
-        accentColor="#FF0400"
+        accentColor="#FBBF24"
         cardWidth={320}
         cardHeight={480}
         showTitle={true}
         showSubtitle={true}
         showTitleOverlay={false}
+        showFocusBorder={true}
+        enableMarquee={false}
         cardPadding={25}
         cardMargin={40}
+        imageContentMode="fit"
       />
     </LinearGradient>
   )

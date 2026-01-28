@@ -61,20 +61,22 @@ export default function LandscapeSearchScreen() {
       <TvosSearchView
         results={results}
         columns={3}
-        placeholder="Search planets..."
+        placeholder="Search the cosmos..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
+        onValidationWarning={(e) => console.warn(`[Landscape] Warning [${e.nativeEvent.type}]: ${e.nativeEvent.message}`)}
         style={{ flex: 1 }}
-        emptyStateText="Search for planets"
-        searchingText="Searching..."
-        noResultsText="No planets found"
-        noResultsHintText="Try a different search term"
+        emptyStateText="Explore the cosmos"
+        searchingText="Scanning the galaxy..."
+        noResultsText="No celestial bodies found"
+        noResultsHintText="Try searching by planet name or description"
         textColor="#00ffff"
         accentColor="#ff00ff"
         cardWidth={500}
         cardHeight={280}
+        imageContentMode="fit"
       />
     </LinearGradient>
   );

@@ -9,7 +9,8 @@
     "web": "expo start --web",
     "prebuild": "EXPO_TV=1 npx expo prebuild --clean",
     "tvos": "npx expo run:ios",
-    "clear": "rm -rf .expo .metro-cache node_modules package-lock.json && npm i && yes | EXPO_TV=1 npx expo prebuild --clean && npm start"
+    "lib": "npm uninstall expo-tvos-search && npm cache clean --force && npm install expo-tvos-search@github:keiver/expo-tvos-search#guard-focus-restauration && rm -rf .expo .metro-cache && yes | EXPO_TV=1 npx expo prebuild --clean && npx expo start --clear",
+    "clear": "rm -rf .expo .metro-cache node_modules package-lock.json && npm i && yes | EXPO_TV=1 npx expo prebuild --clean && npx expo start --clear"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",
@@ -18,7 +19,7 @@
     "expo-linear-gradient": "~15.0.8",
     "expo-router": "~6.0.14",
     "expo-status-bar": "~3.0.9",
-    "expo-tvos-search": "^1.3.0",
+    "expo-tvos-search": "github:keiver/expo-tvos-search#guard-focus-restauration",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "npm:react-native-tvos@0.81.4-0",
