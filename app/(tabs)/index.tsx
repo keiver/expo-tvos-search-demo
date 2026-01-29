@@ -1,86 +1,268 @@
-import {useState} from "react"
-import {Alert, StyleSheet} from "react-native"
-import {useSafeAreaInsets} from "react-native-safe-area-context"
-import {LinearGradient} from "expo-linear-gradient"
-import {TvosSearchView, isNativeSearchAvailable, type SearchResult} from "expo-tvos-search"
-import {PLANETS} from "@/constants/planets"
+import { View, Text, StyleSheet, Platform } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
-export default function MiniSearchScreen() {
-  const [results, setResults] = useState<SearchResult[]>(
-    PLANETS.filter(p => p.title.toLowerCase().includes("planet") || p.subtitle?.toLowerCase().includes("planet"))
-  )
-  const [isLoading, setIsLoading] = useState(false)
-  const insets = useSafeAreaInsets()
+const isTV = Platform.isTV;
 
-  const handleSearch = (event: {nativeEvent: {query: string}}) => {
-    const {query} = event.nativeEvent
-
-    if (!query.trim()) {
-      setResults([])
-      return
-    }
-
-    setIsLoading(true)
-
-    setTimeout(() => {
-      const filtered = PLANETS.filter(
-        planet =>
-          planet.title.toLowerCase().includes(query.toLowerCase()) ||
-          planet.subtitle?.toLowerCase().includes(query.toLowerCase())
-      )
-      setResults(filtered)
-      setIsLoading(false)
-    }, 300)
-  }
-
-  const handleSelect = (event: {nativeEvent: {id: string}}) => {
-    const planet = PLANETS.find(p => p.id === event.nativeEvent.id)
-    if (planet) {
-      Alert.alert(planet.title, planet.subtitle)
-    }
-  }
-
-  if (!isNativeSearchAvailable()) {
-    return null
-  }
+export default function HelpScreen() {
+  const insets = useSafeAreaInsets();
 
   return (
-    <LinearGradient
-      colors={["#0f172a", "#1e293b", "#0f172a"]}
-      locations={[0, 0.5, 1]}
-      style={styles.container}
-      pointerEvents="box-none"
-    >
-      <TvosSearchView
-        results={results}
-        columns={5}
-        placeholder="Quick search..."
-        isLoading={isLoading}
-        topInset={insets.top + 80}
-        onSearch={handleSearch}
-        onSelectItem={handleSelect}
-        onError={e => console.warn(`[Mini] Error [${e.nativeEvent.category}]: ${e.nativeEvent.message}`)}
-        style={{flex: 1}}
-        emptyStateText="Search for planets"
-        searchingText="Searching..."
-        noResultsText="No planets found"
-        noResultsHintText="Try a different search term"
-        textColor="#ffd4a3"
-        accentColor="#ff6b35"
-        cardWidth={240}
-        cardHeight={360}
-        enableMarquee={true}
-        imageContentMode="fit"
-        marqueeDelay={0.8}
-        showTitleOverlay={true}
-      />
-    </LinearGradient>
+    <View style={styles.container}>
+      <LinearGradient colors={["#0f172a", "#1e293b", "#0f172a"]} locations={[0, 0.5, 1]} style={styles.gradient}>
+        {/* Ambient Glows */}
+        <View style={[styles.glow, styles.glowTop]} />
+        <View style={[styles.glow, styles.glowBottom]} />
+
+        {/* Main Content - Two Columns */}
+        <View style={[styles.content, {paddingTop: insets.top + (isTV ? 80 : 60)}]}>
+          {/* Left Column */}
+          <View style={styles.leftColumn}>
+            {/* Hero Section */}
+            <View style={styles.hero}>
+              <View style={styles.iconContainer}>
+                <Ionicons name="tv" size={isTV ? 80 : 60} color="#38bdf8" />
+              </View>
+              <View style={styles.heroText}>
+                <Text style={styles.title}>expo-tvos-search</Text>
+                <Text style={styles.subtitle}>Native tvOS Search UI for React Native</Text>
+              </View>
+            </View>
+
+            {/* Feature Pills */}
+            <View style={styles.featurePills}>
+              {[
+                {icon: "search", label: "Native Search"},
+                {icon: "grid", label: "Grid Layout"},
+                {icon: "color-palette", label: "Customizable"},
+                {icon: "flash", label: "Performant"},
+                {icon: "text", label: "Marquee Text"},
+                {icon: "hardware-chip", label: "HW Keyboard"}
+              ].map((feature, index) => (
+                <View key={index} style={styles.pill}>
+                  <Ionicons name={feature.icon as any} size={20} color="#38bdf8" />
+                  <Text style={styles.pillText}>{feature.label}</Text>
+                </View>
+              ))}
+            </View>
+
+            {/* Footer */}
+            <View style={styles.footer}>
+              <Text style={styles.footerText}>v1.4.0</Text>
+              <Text style={styles.footerText}>•</Text>
+              <Text style={styles.footerText}>Built with Expo</Text>
+            </View>
+          </View>
+
+          {/* Right Column - Info Card */}
+          <View style={styles.rightColumn}>
+            <View style={styles.card}>
+              <LinearGradient
+                colors={["rgba(56, 189, 248, 0.1)", "rgba(59, 130, 246, 0.05)"]}
+                style={styles.cardGradient}
+              >
+                <View style={styles.cardHeader}>
+                  <Ionicons name="information-circle" size={32} color="#38bdf8" />
+                  <Text style={styles.cardTitle}>About This Demo</Text>
+                </View>
+
+                <View style={styles.cardContent}>
+                  <Text style={styles.cardText}>
+                    This app demonstrates the expo-tvos-search library features across tabs:
+                  </Text>
+
+                  <View style={styles.tabsList}>
+                    {[
+                      {name: "Default", desc: "Basic setup, error monitoring"},
+                      {name: "Portrait", desc: "Focus border, search field tracking"},
+                      {name: "Landscape", desc: "Image fit mode, custom state messages"},
+                      {name: "Mini", desc: "Marquee scrolling, compact grid"},
+                      {name: "External Title", desc: "Titles below cards, marquee disabled"},
+                      {name: "Text Controlled", desc: "Programmatic searchText, availability fallback"}
+                    ].map((tab, index) => (
+                      <View key={index} style={styles.tabItem}>
+                        <View style={styles.tabDot} />
+                        <View style={styles.tabTextContainer}>
+                          <Text style={styles.tabName}>{tab.name}</Text>
+                          <Text style={styles.tabDesc}>{tab.desc}</Text>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+
+                  <Text style={styles.cardFooter}>
+                    <Text style={{color: "#38bdf8"}}> https://github.com/keiver/expo-tvos-search</Text>
+                  </Text>
+                </View>
+              </LinearGradient>
+            </View>
+          </View>
+        </View>
+      </LinearGradient>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#2d1b3d"
+    backgroundColor: "#0f172a",
+    overflow: "hidden"
+  },
+  gradient: {
+    flex: 1
+  },
+  glow: {
+    position: "absolute",
+    width: isTV ? 600 : 400,
+    height: isTV ? 600 : 400,
+    borderRadius: isTV ? 300 : 200,
+    opacity: 0.15
+  },
+  glowTop: {
+    backgroundColor: "#38bdf8",
+    top: -200,
+    right: -100
+  },
+  glowBottom: {
+    backgroundColor: "#3b82f6",
+    bottom: -200,
+    left: -100
+  },
+  content: {
+    flex: 1,
+    flexDirection: "row",
+    paddingHorizontal: isTV ? 100 : 48,
+    paddingBottom: isTV ? 80 : 60
+  },
+  leftColumn: {
+    flex: 1,
+    justifyContent: "space-between",
+    paddingRight: isTV ? 60 : 30
+  },
+  rightColumn: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  hero: {
+    flexDirection: "row",
+    alignItems: "center"
+  },
+  iconContainer: {
+    marginRight: isTV ? 32 : 24
+  },
+  heroText: {
+    flex: 1
+  },
+  title: {
+    fontSize: isTV ? 48 : 36,
+    fontWeight: "700",
+    color: "#f1f5f9",
+    marginBottom: 8
+  },
+  subtitle: {
+    fontSize: isTV ? 22 : 18,
+    color: "#94a3b8",
+    lineHeight: isTV ? 32 : 26
+  },
+  featurePills: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: isTV ? 16 : 12,
+    marginTop: isTV ? 40 : 30
+  },
+  pill: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(56, 189, 248, 0.1)",
+    borderWidth: 1,
+    borderColor: "rgba(56, 189, 248, 0.3)",
+    borderRadius: 9999,
+    paddingHorizontal: isTV ? 20 : 16,
+    paddingVertical: isTV ? 12 : 10,
+    gap: 8
+  },
+  pillText: {
+    fontSize: isTV ? 18 : 16,
+    color: "#38bdf8",
+    fontWeight: "500"
+  },
+  footer: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: isTV ? 40 : 30
+  },
+  footerText: {
+    fontSize: isTV ? 16 : 14,
+    color: "#64748b"
+  },
+  card: {
+    width: "80%",
+    maxWidth: isTV ? 600 : 400,
+    overflow: "hidden",
+    borderRadius: 24,
+    borderWidth: 1,
+    borderColor: "rgba(56, 189, 248, 0.2)"
+  },
+  cardGradient: {
+    padding: isTV ? 40 : 32
+  },
+  cardHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: isTV ? 24 : 20
+  },
+  cardTitle: {
+    fontSize: isTV ? 28 : 24,
+    fontWeight: "600",
+    color: "#f1f5f9"
+  },
+  cardContent: {
+    gap: isTV ? 20 : 16
+  },
+  cardText: {
+    fontSize: isTV ? 18 : 16,
+    color: "#cbd5e1",
+    lineHeight: isTV ? 28 : 24
+  },
+  tabsList: {
+    gap: isTV ? 16 : 12
+  },
+  tabItem: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: 12
+  },
+  tabDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: "#38bdf8",
+    marginTop: isTV ? 10 : 8
+  },
+  tabTextContainer: {
+    flex: 1
+  },
+  tabName: {
+    fontSize: isTV ? 18 : 16,
+    fontWeight: "600",
+    color: "#e2e8f0",
+    marginBottom: 4
+  },
+  tabDesc: {
+    fontSize: isTV ? 16 : 14,
+    color: "#94a3b8",
+    lineHeight: isTV ? 22 : 20
+  },
+  cardFooter: {
+    fontSize: isTV ? 22 : 14,
+    color: "#64748b",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: isTV ? 22 : 20,
+    marginTop: isTV ? 8 : 4
   }
 })

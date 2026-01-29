@@ -31,7 +31,14 @@
       "Bash(npm view:*)",
       "Bash(git show:*)",
       "Bash(xargs:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search-demo branch -a)",
+      "Bash(python3:*)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search-demo log --oneline -20)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search-demo stash list)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search branch -a)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search log --oneline -20)",
+      "Bash(git -C /Users/keiverhernandez/@keiver/expo-tvos-search-demo diff --stat)"
     ]
   }
 }

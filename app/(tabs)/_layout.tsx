@@ -4,7 +4,12 @@ export default function TabLayout() {
   return (
     <NativeTabs blurEffect="systemChromeMaterial">
       <NativeTabs.Trigger name="index">
-        <Label>Default</Label>
+        <Label>Help</Label>
+        <Icon sf="info.circle.fill" />
+      </NativeTabs.Trigger>
+
+      <NativeTabs.Trigger name="poster">
+        <Label>Poster Only</Label>
         <Icon sf="photo" />
       </NativeTabs.Trigger>
 
@@ -32,11 +37,6 @@ export default function TabLayout() {
         <Label>Text Controlled</Label>
         <Icon sf="character.cursor.ibeam" />
       </NativeTabs.Trigger>
-
-      <NativeTabs.Trigger name="help">
-        <Label>Help</Label>
-        <Icon sf="info.circle.fill" />
-      </NativeTabs.Trigger>
     </NativeTabs>
-  );
+  )
 }

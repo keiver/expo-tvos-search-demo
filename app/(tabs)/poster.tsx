@@ -1,3 +1,4 @@
+
 import {useState} from "react"
 import {Alert, StyleSheet} from "react-native"
 import {useSafeAreaInsets} from "react-native-safe-area-context"
@@ -5,7 +6,7 @@ import {LinearGradient} from "expo-linear-gradient"
 import {TvosSearchView, isNativeSearchAvailable, type SearchResult} from "expo-tvos-search"
 import {PLANETS} from "@/constants/planets"
 
-export default function MiniSearchScreen() {
+export default function DefaultSearchScreen() {
   const [results, setResults] = useState<SearchResult[]>(
     PLANETS.filter(p => p.title.toLowerCase().includes("planet") || p.subtitle?.toLowerCase().includes("planet"))
   )
@@ -53,26 +54,25 @@ export default function MiniSearchScreen() {
     >
       <TvosSearchView
         results={results}
-        columns={5}
-        placeholder="Quick search..."
+        columns={4}
+        placeholder="Search planets..."
         isLoading={isLoading}
         topInset={insets.top + 80}
         onSearch={handleSearch}
         onSelectItem={handleSelect}
-        onError={e => console.warn(`[Mini] Error [${e.nativeEvent.category}]: ${e.nativeEvent.message}`)}
+        onError={e => console.warn(`[Default] Error [${e.nativeEvent.category}]: ${e.nativeEvent.message}`)}
+        onValidationWarning={e => console.warn(`[Default] Warning [${e.nativeEvent.type}]: ${e.nativeEvent.message}`)}
         style={{flex: 1}}
         emptyStateText="Search for planets"
         searchingText="Searching..."
         noResultsText="No planets found"
         noResultsHintText="Try a different search term"
-        textColor="#ffd4a3"
-        accentColor="#ff6b35"
-        cardWidth={240}
-        cardHeight={360}
-        enableMarquee={true}
+        textColor="#e8e8e8"
+        accentColor="#666666"
+        cardWidth={300}
+        cardHeight={450}
+        showTitleOverlay={false}
         imageContentMode="fit"
-        marqueeDelay={0.8}
-        showTitleOverlay={true}
       />
     </LinearGradient>
   )
@@ -80,7 +80,6 @@ export default function MiniSearchScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#2d1b3d"
+    flex: 1
   }
 })
