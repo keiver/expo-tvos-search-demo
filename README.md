@@ -4,7 +4,6 @@
 
 [![npm version](https://img.shields.io/npm/v/expo-tvos-search.svg?style=flat-square)](https://www.npmjs.com/package/expo-tvos-search)
 [![npm downloads](https://img.shields.io/npm/dm/expo-tvos-search.svg?style=flat-square)](https://www.npmjs.com/package/expo-tvos-search)
-[![GitHub stars](https://img.shields.io/github/stars/keiver/expo-tvos-search.svg?style=flat-square)](https://github.com/keiver/expo-tvos-search)
 [![License](https://img.shields.io/npm/l/expo-tvos-search.svg?style=flat-square)](https://github.com/keiver/expo-tvos-search/blob/main/LICENSE)
 
 ![Lowres Demo GIF](./demo-expo-tvos-search.gif)
