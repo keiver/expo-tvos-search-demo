@@ -19,7 +19,7 @@
     "expo-linear-gradient": "~15.0.8",
     "expo-router": "~6.0.14",
     "expo-status-bar": "~3.0.9",
-    "expo-tvos-search": "github:keiver/expo-tvos-search#focus-restore",
+    "expo-tvos-search": "^1.4.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-native": "npm:react-native-tvos@0.81.4-0",

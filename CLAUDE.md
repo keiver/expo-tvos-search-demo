@@ -67,16 +67,18 @@ When running prebuild (`npm run prebuild`):
 
 ## Code Structure
 
-**App.tsx** - Root component that renders SearchScreen with dark background (#141414)
+**`app/_layout.tsx`** - Root Stack navigator. Defines all screens with `headerShown: false`. No tabs — only one search view instance exists at a time.
 
-**SearchScreen.tsx** - Main search implementation:
-- Uses `TvosSearchView` component from `expo-tvos-search`
-- Implements search filtering over PLANETS array (8 hardcoded planets)
-- Search filters by planet title or subtitle (supports partial matches)
-- Demonstrates debounced search with 300ms setTimeout simulation
-- Shows custom styling props (textColor, accentColor, card dimensions)
+**`app/index.tsx`** - Home screen with a demo menu. Left column shows the library hero, feature pills, and footer. Right column lists 6 focusable demo items that navigate via `router.push()`. Uses `useFocusEffect` + `hasTVPreferredFocus` to restore focus to the last selected demo when returning via the Menu button.
 
-**index.ts** - Entry point using `registerRootComponent` from Expo
+**`app/poster.tsx`** - Default 4-column grid with error monitoring
+**`app/portrait.tsx`** - Portrait cards with focus border and search field tracking
+**`app/landscape.tsx`** - Wide 16:9 cards with custom state messages
+**`app/mini.tsx`** - 5-column compact layout with marquee scrolling
+**`app/external.tsx`** - Titles below cards, marquee disabled
+**`app/minimal.tsx`** - Programmatic searchText control, availability fallback
+
+**`constants/planets.ts`** - Sample data (8 planets with images)
 
 ## Common Issues & Solutions
 
@@ -114,3 +116,53 @@ After prebuild, Xcode creates both iOS and tvOS schemes. The `expo run:ios` comm
 - Extends `expo/tsconfig.base`
 - Strict mode enabled
 - No custom compiler options needed for tvOS
+
+## Cardinal Rule: No Invented Fixes
+
+**When you don't understand a problem, say so. Do not fabricate solutions.**
+
+### The Pattern to Stop
+
+1. User reports a bug or unexpected behavior
+2. You don't actually understand the underlying system (UIKit lifecycle, SwiftUI view hosting, focus engine mechanics, etc.)
+3. You propose a "fix" that sounds plausible but is based on assumptions, not knowledge
+4. The fix breaks something else or makes it worse
+5. Only AFTER user calls it out, you admit you were guessing
+
+**This is not acceptable.**
+
+### Required Behavior
+
+**Before proposing ANY fix to native code (Swift, UIKit, SwiftUI, tvOS focus system):**
+
+1. **State what you actually know vs. what you're guessing**
+   - "I understand X because [documentation/code evidence]"
+   - "I'm unsure about Y — this is speculation"
+
+2. **If you don't understand the root cause, say so explicitly**
+   - Do not propose fixes for problems you haven't diagnosed
+   - "I don't fully understand why this is breaking. Let me investigate first."
+
+3. **Investigate before proposing**
+   - Read the existing code thoroughly
+   - Search for Apple documentation on the specific APIs involved
+   - Look at how similar patterns are handled elsewhere in the codebase
+   - If still unclear, ASK instead of guessing
+
+4. **Never use confident language for uncertain solutions**
+   - Wrong: "The fix is to [do X]"
+   - Right: "One possibility — though I'm not certain — would be..."
+
+**If a proposed change touches any of these, you must:**
+1. Explain WHY it should work (not just WHAT it does)
+2. Identify what could break
+3. Acknowledge uncertainty if present
+
+### The Test
+
+Before proposing a fix, ask yourself:
+- "Am I confident this is correct, or am I hoping it works?"
+- "Can I explain the underlying mechanism, or am I pattern-matching?"
+- "If this breaks, will I be able to say I understood the risk?"
+
+If the answer is "hoping" or "pattern-matching" — **stop and investigate or ask**.

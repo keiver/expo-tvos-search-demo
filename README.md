@@ -23,17 +23,16 @@ A working demo app showcasing the [expo-tvos-search](https://github.com/keiver/e
 - Selection handling and search callbacks
 - Apple TV hardware keyboard support via focus callbacks (v1.3.2+)
 
-## Tabs
+## Demos
 
-- **Minimal** - Bare minimum setup
-- **Default** - 4-column grid with custom colors
-- **Portrait** - Tall cards with overlay titles
-- **Landscape** - Wide 16:9 cards
-- **Mini** - 5-column compact layout
-- **External** - Titles below cards instead of overlay
-- **Help** - About this demo
+- **Poster** - Default 4-column grid with error monitoring
+- **Portrait** - Tall cards with focus border and search field tracking
+- **Landscape** - Wide 16:9 cards with custom state messages
+- **Mini** - 5-column compact layout with marquee scrolling
+- **External Title** - Titles below cards, marquee disabled
+- **Minimal** - Programmatic searchText, availability fallback
 
-See code examples below for each configuration.
+Select a demo from the home screen to launch it. Press Menu on the remote to return — focus is restored to the last selected demo.
 
 ## Prerequisites
 
@@ -58,7 +57,7 @@ npm run tvos
 
 Type planet names (`mars`, `earth`) or descriptions (`giant`, `ice`, `windy`). Use tvOS remote to navigate results, press center to select.
 
-**Tip:** Check the "Minimal" tab for simplest setup.
+**Tip:** Select the "Minimal" demo for the simplest setup.
 
 ## Code Examples
 
@@ -192,7 +191,7 @@ Type planet names (`mars`, `earth`) or descriptions (`giant`, `ice`, `windy`). U
 
 ## Structure
 
-- `app/(tabs)/` - 7 demo tabs showing different configurations
+- `app/` - Home screen + 6 demo screens (flat stack layout, no tabs)
 - `constants/planets.ts` - Sample data (8 planets)
 
 ## Troubleshooting

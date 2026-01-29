@@ -5,13 +5,15 @@ export default function RootLayout() {
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="index" />
+        <Stack.Screen name="poster" />
+        <Stack.Screen name="portrait" />
+        <Stack.Screen name="landscape" />
+        <Stack.Screen name="mini" />
+        <Stack.Screen name="external" />
+        <Stack.Screen name="minimal" />
       </Stack>
       <StatusBar style="light" />
     </>
   );
 }
-
-export const unstable_settings = {
-  anchor: "(tabs)",
-};
